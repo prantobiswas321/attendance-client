@@ -26,7 +26,7 @@ const Home = () => {
             //     alert('Wrong password');
             // }
             else{
-                return;
+                setEmployee("");
             }
         })
         // fetch(`http://localhost:5000/employees/${id}`)
@@ -46,7 +46,10 @@ const Home = () => {
                 <input type="submit" value="Search" />
             </form>
             {
+                employees ?
                 <Search employees={employees}></Search>
+                :
+                <p>Id not found</p>
             }
         </div>
     );
