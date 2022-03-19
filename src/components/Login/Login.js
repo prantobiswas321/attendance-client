@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [jwt, setJwt] = useState({});
@@ -13,7 +13,7 @@ const Login = () => {
             password: passRef.current.value
         }
 
-        fetch('http://localhost:5000/login',{
+        fetch('https://peaceful-fortress-55120.herokuapp.com/login',{
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -26,6 +26,7 @@ const Login = () => {
             setJwt(data);
             JSON.stringify(localStorage.setItem("token", data.token));
         });
+        alert('Login successfull');
         navigate('/');
         e.preventDefault();
     }
@@ -39,7 +40,7 @@ const Login = () => {
                <label>Password : </label>   
                <input type="password" placeholder="Enter Password" ref={passRef} name="password" required/>
                <br />
-               <input type="submit" value="Login" />         
+               <input type="submit" value="Login" />       
              </div>   
           </form>
         </div>

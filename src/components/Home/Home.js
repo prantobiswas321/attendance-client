@@ -17,7 +17,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/employees`)
+        fetch('https://peaceful-fortress-55120.herokuapp.com/employees')
         // .then(res=>res.json())
         .then(res=> res.json())
         .then(data=>setData(data))
@@ -27,7 +27,7 @@ const Home = () => {
         const id = idRef.current.value;
         data.forEach(d=>{
             if(d._id === id){
-                fetch(`http://localhost:5000/employees/${id}`)
+                fetch(`https://peaceful-fortress-55120.herokuapp.com/employees/${id}`)
                 .then(res=> res.json())
                 .then(data=>setEmployee(data))
             }
@@ -57,7 +57,7 @@ const Home = () => {
         };
 
         if(employees.status === 1){
-            fetch('http://localhost:5000/employees/attendance', {
+            fetch('https://peaceful-fortress-55120.herokuapp.com/employees/attendance', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
