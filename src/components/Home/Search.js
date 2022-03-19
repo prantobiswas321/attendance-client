@@ -6,11 +6,11 @@ const Search = (props) => {
     return (
         <div>
             <p>Id: {_id}</p>
-            <p>Name: {employeeName}</p>
+            <p>Employee Name: {employeeName}</p>
             <p>Status : {status}</p>
-            <p>Total Days : {totalDays}</p>    
-            <p>Total Present : {totalPresent}</p>    
-            <p>Total Absent : {totalAbsent}</p>    
+            <p>Total Working days :  {totalDays}</p>    
+            <p>Total Present Days : {totalPresent}</p>    
+            <p>Total Absent Days : {totalAbsent}</p>    
         </div>
     );
 };

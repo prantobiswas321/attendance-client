@@ -41,20 +41,42 @@ const Home = () => {
         idRef.current.value = "";
     }
 
-    const onChange = date =>{
+    const onChange = date => {
         setDate(date);
         const attendencedate = date.toLocaleDateString();
         const Attendencedtlid = employees._id;
 
-        console.log(employees._id);
-    }
+        const attendance = {
+            Attendencedtlid,
+            attendencedate
+        };
+
+        if(employees.status === 1){
+            fetch('http://localhost:5000/employees/attendance', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(attendance)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            if(data.insertedId){
+                alert('Attendance added successfully');
+            }
+        });
+        }
+        else{
+            alert('Not a active employee');
+        }
+    };
     
     
 
     return (
-        <div>
+        <div className="top-margin">
             <form onSubmit={handleSearch}>
-                <input type="text" ref={idRef} placeholder="Search Id" id="" />
+                <input type="text" ref={idRef} placeholder="Search Employee by Id" id="" />
                 <input type="submit" value="Search" />
             </form>
             {
