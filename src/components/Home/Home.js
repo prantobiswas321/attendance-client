@@ -4,12 +4,17 @@ import 'react-calendar/dist/Calendar.css';
 // import Axios from 'axios';
 import Search from './Search';
 import './Home.css';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const jwt = localStorage.getItem("token");
+    // console.log(jwt);
+    // const [jwt,setJwt] = useState(localStorage.getItem("token"));
     const [data, setData] = useState([]);
     const [employees, setEmployee] = useState([]);
     const [date, setDate] = useState(new Date());
     const idRef = useRef();
+    const navigate = useNavigate();
 
     useEffect(()=>{
         fetch(`http://localhost:5000/employees`)
@@ -70,14 +75,24 @@ const Home = () => {
             alert('Not a active employee');
         }
     };
+
+    const logOut = () =>{
+        window.localStorage.removeItem("token");
+        navigate("/login");
+    }
     
     
 
     return (
         <div className="top-margin">
+            <button onClick={logOut}>Log out</button>
             <form onSubmit={handleSearch}>
-                <input type="text" ref={idRef} placeholder="Search Employee by Id" id="" />
-                <input type="submit" value="Search" />
+                {
+                    jwt && <div>
+                        <input type="text" ref={idRef} placeholder="Search Employee by Id" id="" />
+                        <input type="submit" value="Search" />
+                    </div>
+                }
             </form>
             {
                 employees ?
