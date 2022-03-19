@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Axios from 'axios';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+// import Axios from 'axios';
 import Search from './Search';
+import './Home.css';
 
 const Home = () => {
     const [data, setData] = useState([]);
     const [employees, setEmployee] = useState([]);
+    const [date, setDate] = useState(new Date());
     const idRef = useRef();
 
     useEffect(()=>{
@@ -36,6 +40,14 @@ const Home = () => {
         e.preventDefault();
         idRef.current.value = "";
     }
+
+    const onChange = date =>{
+        setDate(date);
+        const attendencedate = date.toLocaleDateString();
+        const Attendencedtlid = employees._id;
+
+        console.log(employees._id);
+    }
     
     
 
@@ -51,6 +63,10 @@ const Home = () => {
                 :
                 <p>Id not found</p>
             }
+            <div className='center'>
+                <Calendar onChange={onChange} value={date} />
+                {console.log(date.toLocaleDateString())}
+            </div>
         </div>
     );
 };
